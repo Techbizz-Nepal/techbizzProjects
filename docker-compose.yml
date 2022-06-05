@@ -3,10 +3,10 @@ services:
   scrapper:
     container_name: "scrapper"
     restart: always
-    build: ./fastApi # Current directory!
+    build: ./projects/fastApi # Current directory!
     command: "/usr/local/bin/gunicorn --preload --reload -b 0.0.0.0:8000 -w 4 -k uvicorn.workers.UvicornWorker app.main:app --chdir=/var/www/fastApi"
     volumes:
-      - "./fastApi:/var/www/fastapi"
+      - "./projects/fastApi:/var/www/fastApi"
     environment:
       PYTHON UNBUFFERED: 1
       PYTHONDONTWRITEBYTECODE: 1
