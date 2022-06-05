@@ -1,0 +1,3 @@
+[submodule "projects/fastApi"]
+	path = projects/fastApi
+	url = git@github.com:susantp/fastApi.git
