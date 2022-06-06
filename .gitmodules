@@ -1,3 +1,6 @@
 [submodule "projects/fastApi"]
 	path = projects/fastApi
 	url = git@github.com:susantp/fastApi.git
+[submodule "projects/nextjsUi"]
+	path = projects/nextjsUi
+	url = git@github.com:susantp/nextjs-ui.git
