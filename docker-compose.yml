@@ -1,5 +1,13 @@
 version: "3"
+networks:
+  thamelmart:
 services:
+
+  customer-ui:
+    container_name: "customer-ui"
+    restart: unless-stopped
+    build: ./projects/nextjsUi
+
   scrapper:
     container_name: "scrapper"
     restart: always
@@ -18,6 +26,17 @@ services:
       - "8000:8000"
     depends_on:
       - mysql
+    networks:
+      - thamelmart
+
+  nginx:
+    networks:
+      - thamelmart
+
+  php-fpm:
+    networks:
+      - thamelmart
+      
   mysql:
     container_name: "fastapi_mysql"
     image: mysql:latest
@@ -31,6 +50,9 @@ services:
       - MYSQL_ROOT_PASSWORD="root"
       - MYSQL_DATABASE="fastapi"
       - MYSQL_PASSWORD="root"
+    networks:
+      - thamelmart
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: "fastapi_pma"
