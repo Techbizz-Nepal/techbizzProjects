@@ -4,3 +4,6 @@
 [submodule "projects/nextjsUi"]
 	path = projects/nextjsUi
 	url = git@github.com:susantp/nextjs-ui.git
+[submodule "projects/api.thamelmart.test"]
+	path = projects/api.thamelmart.test
+	url = git@github.com:susantp/api.thamelmart.test.git
