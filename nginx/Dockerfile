@@ -32,8 +32,8 @@ RUN touch /var/log/messages
 # COPY logrotate/nginx /etc/logrotate.d/
 
 # Set upstream conf and remove the default conf
-RUN echo "upstream php-upstream { server php:9000; }" > /etc/nginx/conf.d/upstream.conf 
-    # && rm /etc/nginx/conf.d/default.conf
+RUN echo "upstream php-upstream { server php:9000; }" > /etc/nginx/conf.d/upstream.conf \
+    && rm /etc/nginx/conf.d/default.conf
 
 ADD ./startup.sh /opt/startup.sh
 RUN sed -i 's/\r//g' /opt/startup.sh
