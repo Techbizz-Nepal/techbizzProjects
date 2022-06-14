@@ -1,0 +1,11 @@
+2022/06/14 09:55:51 [warn] 1#1: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl/default.crt"
+2022/06/14 09:59:22 [emerg] 1#1: no port in upstream "php" in /etc/nginx/sites-available/api.thamelmart.test.conf:28
+2022/06/14 09:59:23 [emerg] 1#1: no port in upstream "php" in /etc/nginx/sites-available/api.thamelmart.test.conf:28
+2022/06/14 09:59:24 [emerg] 1#1: no port in upstream "php" in /etc/nginx/sites-available/api.thamelmart.test.conf:28
+2022/06/14 09:59:25 [emerg] 1#1: no port in upstream "php" in /etc/nginx/sites-available/api.thamelmart.test.conf:28
+2022/06/14 09:59:26 [emerg] 1#1: no port in upstream "php" in /etc/nginx/sites-available/api.thamelmart.test.conf:28
+2022/06/14 09:59:28 [emerg] 1#1: no port in upstream "php" in /etc/nginx/sites-available/api.thamelmart.test.conf:28
+2022/06/14 09:59:32 [emerg] 1#1: no port in upstream "php" in /etc/nginx/sites-available/api.thamelmart.test.conf:28
+2022/06/14 09:59:39 [emerg] 1#1: no port in upstream "php" in /etc/nginx/sites-available/api.thamelmart.test.conf:28
+2022/06/14 09:59:52 [warn] 1#1: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl/default.crt"
+2022/06/14 10:00:02 [warn] 1#1: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl/default.crt"
