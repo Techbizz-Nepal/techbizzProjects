@@ -25,7 +25,7 @@ services:
           - scrapper.test
     depends_on:
       - php
-      - scrapper
+#      - scrapper
   php:
     container_name: "${PROJECT_NAME}_php"
     build: ./php
@@ -48,7 +48,7 @@ services:
     container_name: "${PROJECT_NAME}_scrapper"
     restart: always
     build: ./projects/fastApi # From Current directory!
-    command: "/usr/local/bin/gunicorn --preload --reload -b 0.0.0.0:8000 -w 4 -k uvicorn.workers.UvicornWorker app.main:app --chdir=/var/www/fastApi"
+    command: "/usr/local/bin/gunicorn --preload --reload -b 0.0.0.0:8000 -w 10 -k uvicorn.workers.UvicornWorker app.main:app --chdir=/var/www/fastApi"
     volumes:
       - "./projects:/var/www"
     environment:
