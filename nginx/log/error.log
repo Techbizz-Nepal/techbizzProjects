@@ -1,11 +1,15 @@
-2022/06/14 09:55:51 [warn] 1#1: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl/default.crt"
-2022/06/14 09:59:22 [emerg] 1#1: no port in upstream "php" in /etc/nginx/sites-available/api.thamelmart.test.conf:28
-2022/06/14 09:59:23 [emerg] 1#1: no port in upstream "php" in /etc/nginx/sites-available/api.thamelmart.test.conf:28
-2022/06/14 09:59:24 [emerg] 1#1: no port in upstream "php" in /etc/nginx/sites-available/api.thamelmart.test.conf:28
-2022/06/14 09:59:25 [emerg] 1#1: no port in upstream "php" in /etc/nginx/sites-available/api.thamelmart.test.conf:28
-2022/06/14 09:59:26 [emerg] 1#1: no port in upstream "php" in /etc/nginx/sites-available/api.thamelmart.test.conf:28
-2022/06/14 09:59:28 [emerg] 1#1: no port in upstream "php" in /etc/nginx/sites-available/api.thamelmart.test.conf:28
-2022/06/14 09:59:32 [emerg] 1#1: no port in upstream "php" in /etc/nginx/sites-available/api.thamelmart.test.conf:28
-2022/06/14 09:59:39 [emerg] 1#1: no port in upstream "php" in /etc/nginx/sites-available/api.thamelmart.test.conf:28
-2022/06/14 09:59:52 [warn] 1#1: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl/default.crt"
-2022/06/14 10:00:02 [warn] 1#1: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl/default.crt"
+2022/06/14 11:24:26 [warn] 1#1: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl/default.crt"
+2022/06/14 11:24:26 [warn] 1#1: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl/fastapi.crt"
+2022/06/14 11:33:20 [emerg] 1#1: invalid URL prefix in /etc/nginx/sites-available/fastapi.conf:8
+2022/06/14 11:33:21 [emerg] 1#1: invalid URL prefix in /etc/nginx/sites-available/fastapi.conf:8
+2022/06/14 11:33:22 [emerg] 1#1: invalid URL prefix in /etc/nginx/sites-available/fastapi.conf:8
+2022/06/14 11:33:23 [emerg] 1#1: invalid URL prefix in /etc/nginx/sites-available/fastapi.conf:8
+2022/06/14 11:33:25 [emerg] 1#1: invalid URL prefix in /etc/nginx/sites-available/fastapi.conf:8
+2022/06/14 11:33:27 [emerg] 1#1: invalid URL prefix in /etc/nginx/sites-available/fastapi.conf:8
+2022/06/14 11:33:31 [emerg] 1#1: invalid URL prefix in /etc/nginx/sites-available/fastapi.conf:8
+2022/06/14 11:33:38 [warn] 1#1: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl/default.crt"
+2022/06/14 11:33:38 [warn] 1#1: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl/fastapi.crt"
+2022/06/14 11:33:45 [warn] 1#1: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl/default.crt"
+2022/06/14 11:33:45 [warn] 1#1: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl/fastapi.crt"
+2022/06/14 11:36:56 [warn] 1#1: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl/default.crt"
+2022/06/14 11:36:56 [warn] 1#1: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl/fastapi.crt"
