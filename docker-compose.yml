@@ -1,6 +1,23 @@
 version: "3"
 
 services:
+  api:
+    container_name: "${PROJECT_NAME}-api"
+    restart: unless-stopped
+    build: ./projects/api.thamelmart.test
+    user: 1000:1000
+    environment:
+      PHP_MEMORY_LIMIT: "${PHP_MEMORY_LIMIT}"
+      COMPOSER_MEMORY_LIMIT: '-1'
+    # command: composer install
+    volumes:
+      - ./projects:/var/www
+    # working_dir: /var/www/api.thamelmart.test
+    ports:
+      - '81:81'
+      - '446:446'
+    networks:
+      - thamelmart
   scrapper:
     container_name: "${PROJECT_NAME}_scrapper"
     restart: always
