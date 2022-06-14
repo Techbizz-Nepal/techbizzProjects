@@ -1,6 +1,0 @@
-192.168.208.1 - - [14/Jun/2022:11:34:41 +0000] "GET / HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.115 Safari/537.36"
-192.168.208.1 - - [14/Jun/2022:11:34:41 +0000] "GET /favicon.ico HTTP/1.1" 200 0 "https://thamelmart.test/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.115 Safari/537.36"
-192.168.224.1 - - [14/Jun/2022:11:37:38 +0000] "GET / HTTP/1.1" 200 37 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.115 Safari/537.36"
-192.168.224.1 - - [14/Jun/2022:11:37:38 +0000] "GET /favicon.ico HTTP/1.1" 200 0 "https://thamelmart.test/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.115 Safari/537.36"
-192.168.224.1 - - [14/Jun/2022:11:42:57 +0000] "GET / HTTP/1.1" 200 2100 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.115 Safari/537.36"
-192.168.224.1 - - [14/Jun/2022:11:42:57 +0000] "GET /favicon.ico HTTP/1.1" 200 0 "https://thamelmart.test/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.115 Safari/537.36"
