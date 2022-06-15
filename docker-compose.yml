@@ -28,7 +28,6 @@ services:
       - scrapper
   ui:
     container_name: "${PROJECT_NAME}_ui"
-    restart: unless-stopped
     volumes:
       - ./projects/thamelui:/var/www/thamelui
     build: ./projects/thamelui
