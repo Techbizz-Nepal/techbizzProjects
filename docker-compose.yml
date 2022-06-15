@@ -25,7 +25,17 @@ services:
           - scrapper.test
     depends_on:
       - php
-#      - scrapper
+      - scrapper
+  ui:
+    container_name: "${PROJECT_NAME}_ui"
+    restart: unless-stopped
+    volumes:
+      - ./projects/thamelui:/var/www/thamelui
+    build: ./projects/thamelui
+    ports:
+      - '3000:3000'
+    networks:
+      - thamelmart
   php:
     container_name: "${PROJECT_NAME}_php"
     build: ./php
