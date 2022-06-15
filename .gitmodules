@@ -2,8 +2,8 @@
 	path = projects/fastApi
 	url = git@github.com:susantp/fastApi.git
 [submodule "projects/nextjsUi"]
-	path = projects/nextjsUi
-	url = git@github.com:susantp/nextjs-ui.git
+	path = projects/thamelui
+	url = git@github.com:susantp/thamelui.git
 [submodule "projects/api.thamelmart.test"]
 	path = projects/api.thamelmart.test
 	url = git@github.com:susantp/api.thamelmart.test.git
