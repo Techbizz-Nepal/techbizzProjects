@@ -4,6 +4,6 @@
 [submodule "api"]
 	path = projects/api.thamelmart.test
 	url = git@github.com:susantp/api.thamelmart.test.git
-[submodule "projects/thamelui"]
+[submodule "thamelui"]
 	path = projects/thamelui
 	url = git@github.com:susantp/thamelui.git
