@@ -7,3 +7,6 @@
 [submodule "thamelui"]
 	path = projects/thamelui
 	url = git@github.com:susantp/thamelui.git
+[submodule "thamelmart"]
+	path = projects/thamelmart
+	url = git@github.com:susantp/thamelmart.git
