@@ -27,6 +27,7 @@ services:
       thamelmart:
         aliases:
           - scrapper.test
+          - api.thamelmart.test
     depends_on:
       - php
       - scrapper
