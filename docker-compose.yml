@@ -87,7 +87,7 @@ services:
       - "~/.myproject/data/mysql:/var/lib/mysql"
       - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
     ports:
-      - "3306:3306"
+      - "3307:3306"
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: root
