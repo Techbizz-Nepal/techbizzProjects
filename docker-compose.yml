@@ -39,6 +39,7 @@ services:
     build: ./projects/thamelui
     ports:
       - '3000:3000'
+    command: "npm run dev"
     networks:
       - thamelmart
   php:
@@ -48,16 +49,27 @@ services:
     environment:
       PHP_MEMORY_LIMIT: "${PHP_MEMORY_LIMIT}"
       COMPOSER_MEMORY_LIMIT: '-1'
+      USER: "${USER}"
+      UID: "${UID}"
     volumes:
-      - ./projects:/var/www
+      - ./projects/api.thamelmart.test:/var/www/api.thamelmart.test
+      - ./projects/thamelmart:/var/www/thamelmart
+      # - ./php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      # - ./php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
+    
+    # chmod -R 775 storage && chmod -R 775 bootstrap/cache && chmod -R ugo+rw storage && chmod -R ugo+rw bootstrap/cache
+    # entrypoint: ["/bin/sh","-c"]
+    # command: "ls /var/www"
     ports:
       - '9000:9000'
+      - '9003:9003'
     networks:
       - thamelmart
     depends_on:
       - mysql
       - scrapper
       - pma
+      - redis
 
   scrapper:
     container_name: "${PROJECT_NAME}_scrapper"
@@ -65,7 +77,7 @@ services:
     build: ./projects/fastApi # From Current directory!
     command: "/usr/local/bin/gunicorn --reload -b 0.0.0.0:8000 -w 10 -k uvicorn.workers.UvicornWorker app.main:app --chdir=/var/www/fastApi"
     volumes:
-      - "./projects:/var/www"
+      - "./projects/fastApi:/var/www/fastApi"
     environment:
       PYTHON UNBUFFERED: 1
       PYTHONDONTWRITEBYTECODE: 1
