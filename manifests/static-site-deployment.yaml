@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: static-site-deployment
+  labels:
+    app: static-site
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ${PROJECT_NAME}_nginx
+  template:
+    metadata:
+      labels:
+        app: ${PROJECT_NAME}_nginx
+    spec:
+      containers:
+      - name: ${PROJECT_NAME}_nginx
+        image: nginx:alpine
+        imagePullPolicy: Always
+        ports: 
+        - containerPort: 80
