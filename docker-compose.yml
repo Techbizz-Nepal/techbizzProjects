@@ -11,11 +11,7 @@ services:
     ports:
       - '80:80' #thamelmart
       - '443:443' #thamelmart
-      - '81:8100' #api thamelmart
-      - '446:4460' #api thamelmart
-      - '82:8200' #scrapper
-      - '447:4470' #scrapper
-      - '83:8300' #ui
+      
     volumes:
       - ./projects/api.thamelmart.test:/var/www/api.thamelmart.test
       - ./projects/thamelmart:/var/www/thamelmart
@@ -28,6 +24,7 @@ services:
         aliases:
           - scrapper.test
           - api.thamelmart.test
+          - thamelmart.test
     depends_on:
       - php
       - scrapper
@@ -54,12 +51,6 @@ services:
     volumes:
       - ./projects/api.thamelmart.test:/var/www/api.thamelmart.test
       - ./projects/thamelmart:/var/www/thamelmart
-      # - ./php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-      # - ./php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
-    
-    # chmod -R 775 storage && chmod -R 775 bootstrap/cache && chmod -R ugo+rw storage && chmod -R ugo+rw bootstrap/cache
-    # entrypoint: ["/bin/sh","-c"]
-    # command: "ls /var/www"
     ports:
       - '9000:9000'
       - '9003:9003'
@@ -127,7 +118,6 @@ services:
     container_name: "${PROJECT_NAME}_redis"
     volumes:
      - "~/.myproject/data/redis:/data"
-    # command: --requirepass ${REDIS_PASSWORD}
     ports:
       - "${REDIS_PORT}:6379"
     networks:
@@ -135,4 +125,3 @@ services:
 networks:
   thamelmart:
     driver: bridge
-  # volumes:
