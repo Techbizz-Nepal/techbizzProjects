@@ -35,8 +35,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: pma
+  name: pma-service
 spec:
+  type: NodePort
   selector:
     app: pma
   ports:  
