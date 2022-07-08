@@ -3,26 +3,41 @@ kind: Deployment
 metadata:
   name: nginx-deployment
   labels:
+    tier: backend
     app: nginx
 spec:
   replicas: 2
   selector:
     matchLabels:
+      tier: backend
       app: nginx
   template:
     metadata:
       labels:
+        tier: backend
         app: nginx
     spec:
+      volumes:
+        - name: config
+          configMap:
+            name: nginx-config
+            items:
+              - key: config
+                path: site.conf
       containers:
       - name: nginx
-        image: nginx:alpine
         imagePullPolicy: Always
+        image: nginx:latest
+        volumeMounts:
+          - name: config
+            mountPath: /etc/nginx/conf.d
         ports: 
         - containerPort: 80
           name: http
+          protocol: TCP
         - containerPort: 443
           name: https
+          protocol: TCP
         resources:
           requests:
             memory: "64Mi"
@@ -30,21 +45,31 @@ spec:
           limits: 
             memory: "128Mi"
             cpu: "500m"
+      volumes:
+      - name: config
+        configMap:
+          name: nginx-config
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: nginx-service
+  labels: 
+    tier: backend
+    app: nginx
 spec:
   selector:
+    tier: backend
     app: nginx
   ports:
   - name: http
     port: 80
     protocol: TCP
     targetPort: 80
-  - name: https
-    port: 443
-    protocol: TCP
-    targetPort: 443
-  sessionAffinity: None
+    nodePort: 32380
+  # - name: https
+  #   port: 443
+  #   protocol: TCP
+  #   targetPort: 443
+  #   nodePort: 32443
+  type: LoadBalancer
