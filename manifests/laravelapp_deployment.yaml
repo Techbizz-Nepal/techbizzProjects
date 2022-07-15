@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravelapp-deployment
+  labels:
+    app: laravelapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: laravelapp
+  template:
+    metadata:
+      labels:
+        app: laravelapp
+    spec:
+      volumes:
+        # Create the shared files volume to be used in both pods
+        - name: shared-files
+          emptyDir: {}
+      containers:
+      - name: laravelapp
+        image: techbizz/laravelapp:latest
+        imagePullPolicy: Always
+        volumeMounts:
+          - name: shared-files
+            mountPath: /var/www/app
+        # ports: 
+        # - containerPort: 80
+        #   name: http
+        # - containerPort: 443
+        #   name: https
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits: 
+            memory: "128Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: laravelapp-service
+  labels:
+    tier: backend
+spec:
+  selector:
+    app: laravelapp
+  ports:
+    - protocol: TCP
+      port: 9000

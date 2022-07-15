@@ -18,19 +18,20 @@ spec:
         app: nginx
     spec:
       volumes:
-        - name: config
+        - name: nginx-config
           configMap:
             name: nginx-config
-            items:
-              - key: config
-                path: site.conf
       containers:
       - name: nginx
         imagePullPolicy: Always
         image: nginx:latest
         volumeMounts:
-          - name: config
-            mountPath: /etc/nginx/conf.d
+          - name: nginx-config
+            subPath: nginx.conf
+            mountPath: /etc/nginx/nginx.conf
+          - name: nginx-config
+            subPath: app.conf
+            mountPath: /etc/nginx/sites-available/app.conf
         ports: 
         - containerPort: 80
           name: http
@@ -45,10 +46,6 @@ spec:
           limits: 
             memory: "128Mi"
             cpu: "500m"
-      volumes:
-      - name: config
-        configMap:
-          name: nginx-config
 ---
 apiVersion: v1
 kind: Service
