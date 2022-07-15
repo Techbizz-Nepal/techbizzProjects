@@ -10,6 +10,13 @@
 [submodule "thamelmart"]
 	path = projects/thamelmart
 	url = git@github.com:susantp/thamelmart.git
+
+[submodule "newstb"]
+	path = projects/api-gateway
+	url = git@bitbucket.org:newitventurecorp/api-gateway.git
 [submodule "iptv"]
 	path = projects/iptv-backend
-	url = git@github.com:susantp/thamelmart.git
+	url = git@bitbucket.org:newitventurecorp/iptv-backend.git
+[submodule "micromovies"]
+	path = projects/movie-service-microservice
+	url = git@bitbucket.org:newitventurecorp/movie-service-microservice.git
