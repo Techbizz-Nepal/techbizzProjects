@@ -27,27 +27,22 @@ services:
           - iptv.test
           - newstb.test
           - micromovies.test
-    depends_on:
-      - php
 
-  php:
-    container_name: "${PROJECT_NAME}_php"
-    build: ./php
+  php7:
+    container_name: "${PROJECT_NAME}_php7"
+    build: ./php7
     # restart: unless-stopped
     environment:
       PHP_MEMORY_LIMIT: "${PHP_MEMORY_LIMIT}"
       COMPOSER_MEMORY_LIMIT: '-1'
-      USER: "${USER}"
-      UID: "${UID}"
     volumes:
-      - ./projects/api.thamelmart.test:/var/www/api.thamelmart.test
-      - ./projects/thamelmart:/var/www/thamelmart
+      - ./projects:/var/www
     ports:
       - '9000:9000'
-      - '9003:9003'
     networks:
       - thamelmart
     depends_on:
+      - nginx
       - mysql
       - pma
       - redis

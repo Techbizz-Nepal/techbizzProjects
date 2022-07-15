@@ -1,10 +1,10 @@
-FROM php:8.1.0-fpm
-
+FROM php:7.4.0-fpm
+ARG UID=1000
+ARG GID=1000
 USER root
 
 WORKDIR /var/www
 RUN apt-get update && apt-get install -y \
-            git \
             libxpm-dev \
             libfreetype6-dev \
             libwebp-dev \
@@ -34,11 +34,5 @@ RUN docker-php-ext-configure gd \
             --with-webp \
             --with-xpm \
             --with-freetype \ 
-    # docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install gd 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-# RUN cd /var/www/thamelmart \ 
-#     && chmod -R 775 storage \
-#     && chmod -R 775 bootstrap/cache \
-#     && chmod -R ugo+rw storage \ 
-#     && chmod -R ugo+rw bootstrap/cache
