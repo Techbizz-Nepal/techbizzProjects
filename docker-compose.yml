@@ -49,7 +49,6 @@ services:
       - thamelmart
     depends_on:
       - mysql
-      - scrapper
       - pma
       - redis
 
