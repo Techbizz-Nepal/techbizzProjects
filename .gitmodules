@@ -10,3 +10,6 @@
 [submodule "thamelmart"]
 	path = projects/thamelmart
 	url = git@github.com:susantp/thamelmart.git
+[submodule "iptv"]
+	path = projects/iptv-backend
+	url = git@github.com:susantp/thamelmart.git

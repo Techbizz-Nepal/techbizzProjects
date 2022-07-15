@@ -13,8 +13,7 @@ services:
       - '443:443' #thamelmart
       
     volumes:
-      - ./projects/api.thamelmart.test:/var/www/api.thamelmart.test
-      - ./projects/thamelmart:/var/www/thamelmart
+      - ./projects:/var/www
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ${NGINX_SITES_PATH}:/etc/nginx/sites-available
       - ./nginx/log:/var/log/nginx
@@ -25,20 +24,12 @@ services:
           - scrapper.test
           - api.thamelmart.test
           - thamelmart.test
+          - iptv.test
+          - newstb.test
+          - micromovies.test
     depends_on:
       - php
-      - scrapper
-  ui:
-    container_name: "${PROJECT_NAME}_ui"
-    volumes:
-      - ./projects/thamelui:/var/www/thamelui
-      - ./projects/thamelmart:/var/www/thamelmart
-    build: ./projects/thamelui
-    ports:
-      - '3000:3000'
-    command: "npm run dev"
-    networks:
-      - thamelmart
+
   php:
     container_name: "${PROJECT_NAME}_php"
     build: ./php
@@ -61,27 +52,6 @@ services:
       - scrapper
       - pma
       - redis
-
-  scrapper:
-    container_name: "${PROJECT_NAME}_scrapper"
-    restart: always
-    build: ./projects/fastApi # From Current directory!
-    command: "/usr/local/bin/gunicorn --reload -b 0.0.0.0:8000 -w 10 -k uvicorn.workers.UvicornWorker app.main:app --chdir=/var/www/fastApi"
-    volumes:
-      - "./projects/fastApi:/var/www/fastApi"
-    environment:
-      PYTHON UNBUFFERED: 1
-      PYTHONDONTWRITEBYTECODE: 1
-      APP_NAME: "fast api"
-      ADMIN_EMAIL: "gracysusant@gmail.com"
-      DB_URL: "mysql+mysqlconnector://root:root@mysql:3306/fastapi"
-      SCRAP_API_TOKEN: "dd424a4ae2c60473bb07132def3b89a1"
-    ports:
-      - "8000:8000"
-    depends_on:
-      - mysql
-    networks:
-      - thamelmart
 
   mysql:
     container_name: "${PROJECT_NAME}_mysql"
