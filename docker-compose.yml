@@ -10,7 +10,7 @@ services:
     container_name: "${PROJECT_NAME}_nginx"
     ports:
       - '80:80' #thamelmart
-      - '443:443' #thamelmart
+      - '443:446' #thamelmart
       
     volumes:
       - ./projects/api.thamelmart.test:/var/www/api.thamelmart.test
@@ -26,7 +26,6 @@ services:
           - api.thamelmart.test
           - thamelmart.test
     depends_on:
-      - php
       - scrapper
   ui:
     container_name: "${PROJECT_NAME}_ui"
@@ -46,14 +45,12 @@ services:
     environment:
       PHP_MEMORY_LIMIT: "${PHP_MEMORY_LIMIT}"
       COMPOSER_MEMORY_LIMIT: '-1'
-      USER: "${USER}"
-      UID: "${UID}"
+      # USER: "${USER}"
+      # UID: "${UID}"
     volumes:
-      - ./projects/api.thamelmart.test:/var/www/api.thamelmart.test
-      - ./projects/thamelmart:/var/www/thamelmart
+      - ./projects:/var/www
     ports:
       - '9000:9000'
-      - '9003:9003'
     networks:
       - thamelmart
     depends_on:
@@ -90,7 +87,7 @@ services:
       - "~/.myproject/data/mysql:/var/lib/mysql"
       - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
     ports:
-      - "3307:3306"
+      - "3306:3306"
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: root
