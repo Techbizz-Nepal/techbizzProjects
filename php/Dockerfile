@@ -2,7 +2,6 @@ FROM php:8.1.8-fpm-bullseye
 
 USER root
 
-WORKDIR /var/www
 RUN apt-get update && apt-get install -y \
             # curl \
             # libmemcached-dev \
@@ -48,8 +47,15 @@ RUN docker-php-ext-configure gd \
     # docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install gd 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-# RUN cd /var/www/thamelmart \ 
-#     && chmod -R 775 storage \
-#     && chmod -R 775 bootstrap/cache \
-#     && chmod -R ugo+rw storage \ 
-#     && chmod -R ugo+rw bootstrap/cache
+
+
+COPY ./aliases.sh /root/aliases.sh
+
+RUN sed -i 's/\r//' /root/aliases.sh && \
+    echo "" >> ~/.bashrc && \
+    echo "# Load Custom Aliases" >> ~/.bashrc && \
+    echo "source ~/aliases.sh" >> ~/.bashrc && \
+	echo "" >> ~/.bashrc
+
+
+WORKDIR /var/www
