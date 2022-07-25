@@ -26,7 +26,7 @@ services:
           - api.thamelmart.test
           - thamelmart.test
     depends_on:
-      - scrapper
+      - php
   ui:
     container_name: "${PROJECT_NAME}_ui"
     volumes:
@@ -55,7 +55,6 @@ services:
       - thamelmart
     depends_on:
       - mysql
-      - scrapper
       - pma
       - redis
 
