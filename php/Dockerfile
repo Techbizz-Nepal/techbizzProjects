@@ -47,15 +47,48 @@ RUN docker-php-ext-configure gd \
     # docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install gd 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Add a non-root user to prevent files being created with root permissions on host machine.
+ARG PUID=1000
+ENV PUID ${PUID}
+ARG PGID=1000
+ENV PGID ${PGID}
 
+RUN groupadd -g ${PGID} apache && \
+    useradd -l -u ${PUID} -g apache -m apache && \
+    usermod -p "*" apache -s /bin/bash
+
+###########################################################################
+# Set Timezone
+###########################################################################
+
+ARG TZ=UTC+05:45
+ENV TZ ${TZ}
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+###########################################################################
+# User Aliases
+###########################################################################
+
+USER root
 
 COPY ./aliases.sh /root/aliases.sh
+COPY ./aliases.sh /home/apache/aliases.sh
 
 RUN sed -i 's/\r//' /root/aliases.sh && \
+    sed -i 's/\r//' /home/apache/aliases.sh && \
+    chown apache:apache /home/apache/aliases.sh && \
     echo "" >> ~/.bashrc && \
     echo "# Load Custom Aliases" >> ~/.bashrc && \
     echo "source ~/aliases.sh" >> ~/.bashrc && \
-	echo "" >> ~/.bashrc
+	  echo "" >> ~/.bashrc
+
+USER apache
+
+RUN echo "" >> ~/.bashrc && \
+    echo "# Load Custom Aliases" >> ~/.bashrc && \
+    echo "source ~/aliases.sh" >> ~/.bashrc && \
+	  echo "" >> ~/.bashrc
 
 
 WORKDIR /var/www
