@@ -18,7 +18,7 @@ services:
       - ./nginx/log:/var/log/nginx
       - ./nginx/ssl:/etc/nginx/ssl
     networks:
-      thamelmart:
+      techbizz:
         aliases:
           - scrapper.test
           - api.thamelmart.test
@@ -35,7 +35,7 @@ services:
       - '3000:3000'
     command: "npm run dev"
     networks:
-      - thamelmart
+      - techbizz
   php:
     container_name: "${PROJECT_NAME}_php"
     build: ./php
@@ -50,7 +50,7 @@ services:
     ports:
       - '9000:9000'
     networks:
-      - thamelmart
+      - techbizz
     depends_on:
       - mysql
       - pma
@@ -75,7 +75,7 @@ services:
     depends_on:
       - mysql
     networks:
-      - thamelmart
+      - techbizz
 
   mysql:
     container_name: "${PROJECT_NAME}_mysql"
@@ -90,7 +90,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       TZ: ${TIMEZONE}
     networks:
-      - thamelmart
+      - techbizz
 
   pma:
     image: phpmyadmin/phpmyadmin
@@ -105,7 +105,7 @@ services:
     ports:
       - "8090:80"
     networks:
-      - thamelmart
+      - techbizz
 
   redis:
     build: ./redis
@@ -115,7 +115,7 @@ services:
     ports:
       - "${REDIS_PORT}:6379"
     networks:
-      - thamelmart
+      - techbizz
 networks:
-  thamelmart:
+  techbizz:
     driver: bridge
