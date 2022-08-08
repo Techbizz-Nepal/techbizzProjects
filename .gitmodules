@@ -1,12 +1,6 @@
-[submodule "fastApi"]
-	path = projects/fastApi
-	url = git@github.com:susantp/fastApi.git
 [submodule "api"]
 	path = projects/api.thamelmart.test
 	url = git@github.com:susantp/api.thamelmart.test.git
-[submodule "thamelui"]
-	path = projects/thamelui
-	url = git@github.com:susantp/thamelui.git
-[submodule "thamelmart"]
-	path = projects/thamelmart
-	url = git@github.com:susantp/thamelmart.git
+[submodule "techbizz-portfolio"]
+	path = projects/techbizz-portfolio
+	url = git@github.com:susantp/techbizz-portfolio.git
