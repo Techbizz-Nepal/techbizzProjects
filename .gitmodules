@@ -1,6 +1,8 @@
 [submodule "api"]
 	path = projects/api.thamelmart.test
 	url = git@github.com:susantp/api.thamelmart.test.git
+	branch = main
 [submodule "techbizz-portfolio"]
 	path = projects/techbizz-portfolio
 	url = git@github.com:susantp/techbizz-portfolio.git
+	branch = main
