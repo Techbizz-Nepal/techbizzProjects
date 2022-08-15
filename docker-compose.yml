@@ -49,7 +49,7 @@ services:
     container_name: "${PROJECT_NAME}_mysql"
     build: ./mysql
     volumes:
-      - "~/.myproject/data/mysql:/var/lib/mysql"
+      - "~/.kuber/data/mysql:/var/lib/mysql"
       - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
@@ -79,7 +79,7 @@ services:
     build: ./redis
     container_name: "${PROJECT_NAME}_redis"
     volumes:
-     - "~/.myproject/data/redis:/data"
+     - "~/.kuber/data/redis:/data"
     ports:
       - "${REDIS_PORT}:6379"
     networks:
