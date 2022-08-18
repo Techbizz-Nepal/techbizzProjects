@@ -12,8 +12,7 @@ services:
       - '80:80' #thamelmart
       - '443:443' #thamelmar
     volumes:
-      - ./projects/api.thamelmart.test:/var/www/api.thamelmart.test
-      - ./projects/thamelmart:/var/www/thamelmart
+      - ./projects:/var/www
       - ${NGINX_SITES_PATH}:/etc/nginx/sites-available
       - ./nginx/log:/var/log/nginx
       - ./nginx/ssl:/etc/nginx/ssl
@@ -22,7 +21,6 @@ services:
         aliases:
           - scrapper.test
           - api.thamelmart.test
-          - thamelmart.test
     depends_on:
       - php
   php:
