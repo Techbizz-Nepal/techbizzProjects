@@ -10,3 +10,7 @@
 	path = projects/restaurant
 	url = git@github.com:susantp/restaurant.git
 	branch = main
+[submodule "api"]
+	path = projects/projects/api.techbizz.test
+	url = git@github.com:susantp/api.techbizz.test.git
+	branch = main
