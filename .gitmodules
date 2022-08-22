@@ -14,3 +14,7 @@
 	path = projects/api.techbizz.test
 	url = git@github.com:susantp/api.techbizz.test.git
 	branch = main
+[submodule "admin"]
+	path = projects/admin
+	url = git@github.com:susantp/admin.git
+	branch = main
