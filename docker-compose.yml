@@ -20,7 +20,7 @@ services:
       techbizz:
         aliases:
           - scrapper.test
-          - api.thamelmart.test
+          - api.techbizz.test
     depends_on:
       - php
   php:
