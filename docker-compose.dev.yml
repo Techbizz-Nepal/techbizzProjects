@@ -23,7 +23,7 @@ services:
           - scrapper.test
           - api.techbizz.test
     depends_on:
-      - php
+      - api
   
   adminui:
     container_name: "${PROJECT_NAME}_adminui"
@@ -36,17 +36,17 @@ services:
     networks:
       - techbizz
   
-  php:
+  api:
     container_name: "${PROJECT_NAME}_php"
-    build: ./php
+    build: ./projects/api.techbizz.test
     # restart: unless-stopped
     environment:
       PHP_MEMORY_LIMIT: "${PHP_MEMORY_LIMIT}"
       COMPOSER_MEMORY_LIMIT: '-1'
-      # USER: "${USER}"
-      # UID: "${UID}"
+      # USER: apache
+      # UID: 1000
     volumes:
-      - ./projects:/var/www
+      - ./projects/api.techbizz.test:/var/www/api.techbizz.test
     ports:
       - '9000:9000'
     networks:
