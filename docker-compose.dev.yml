@@ -23,6 +23,7 @@ services:
           - api.techbizz.test
     depends_on:
       - php
+  
   adminui:
     container_name: "${PROJECT_NAME}_adminui"
     volumes:
@@ -32,6 +33,7 @@ services:
       - '3000:3000'
     networks:
       - techbizz
+  
   php:
     container_name: "${PROJECT_NAME}_php"
     build: ./php
