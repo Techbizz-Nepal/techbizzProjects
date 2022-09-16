@@ -1,6 +1,7 @@
 version: "3"
 
 services:
+ 
   nginx:
     image: nginx:stable-alpine
     restart: unless-stopped
@@ -93,6 +94,7 @@ services:
       - "${REDIS_PORT}:6379"
     networks:
       - techbizz
+
 networks:
   techbizz:
     driver: bridge
