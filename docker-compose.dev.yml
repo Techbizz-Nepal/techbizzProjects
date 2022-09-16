@@ -27,11 +27,12 @@ services:
   
   adminui:
     container_name: "${PROJECT_NAME}_adminui"
-    volumes:
-      - ./projects/admin:/var/www/admin
     build: ./projects/admin
+    volumes:
+      - ./projects/admin:/app/
     ports:
       - '3000:3000'
+    command: sh -c "yarn && yarn dev"
     networks:
       - techbizz
   
