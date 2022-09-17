@@ -28,7 +28,7 @@ services:
       - store
   
   admin:
-    container_name: "${PROJECT_NAME}_adminui"
+    container_name: "${PROJECT_NAME}_admin"
     build: ./projects/admin
     volumes:
       - ./projects/admin:/admin
