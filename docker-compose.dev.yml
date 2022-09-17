@@ -20,19 +20,32 @@ services:
     networks:
       techbizz:
         aliases:
-          - scrapper.test
           - api.techbizz.test
+            
     depends_on:
       - api
+      - admin
+      - store
   
-  adminui:
+  admin:
     container_name: "${PROJECT_NAME}_adminui"
     build: ./projects/admin
     volumes:
-      - ./projects/admin:/app/
+      - ./projects/admin:/admin
     ports:
       - '3000:3000'
     command: sh -c "yarn && yarn dev"
+    networks:
+      - techbizz
+  
+  store:
+    container_name: "${PROJECT_NAME}_store"
+    build: ./projects/store-ui
+    volumes:
+      - ./projects/store-ui:/store
+    ports:
+      - '3001:3001'
+    command: sh -c "yarn && yarn dev --port=3001"
     networks:
       - techbizz
   
