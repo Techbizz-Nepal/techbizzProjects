@@ -1,6 +1,7 @@
 version: "3"
 
 services:
+ 
   nginx:
     image: nginx:stable-alpine
     restart: unless-stopped
@@ -19,21 +20,46 @@ services:
     networks:
       techbizz:
         aliases:
-          - scrapper.test
-          - api.thamelmart.test
+          - api.techbizz.test
+            
     depends_on:
-      - php
-  php:
+      - api
+      - admin
+      - store
+  
+  admin:
+    container_name: "${PROJECT_NAME}_admin"
+    build: ./projects/admin
+    volumes:
+      - ./projects/admin:/admin
+    ports:
+      - '3000:3000'
+    command: sh -c "yarn && yarn build && yarn start"
+    networks:
+      - techbizz
+  
+  store:
+    container_name: "${PROJECT_NAME}_store"
+    build: ./projects/store-ui
+    volumes:
+      - ./projects/store-ui:/store
+    ports:
+      - '3001:3001'
+    command: sh -c "yarn && yarn build && yarn start --port=3001"
+    networks:
+      - techbizz
+  
+  api:
     container_name: "${PROJECT_NAME}_php"
-    build: ./php
+    build: ./projects/api.techbizz.test
     # restart: unless-stopped
     environment:
       PHP_MEMORY_LIMIT: "${PHP_MEMORY_LIMIT}"
       COMPOSER_MEMORY_LIMIT: '-1'
-      # USER: "${USER}"
-      # UID: "${UID}"
+      # USER: apache
+      # UID: 1000
     volumes:
-      - ./projects:/var/www
+      - ./projects/api.techbizz.test:/var/www/api.techbizz.test
     ports:
       - '9000:9000'
     networks:
@@ -82,6 +108,7 @@ services:
       - "${REDIS_PORT}:6379"
     networks:
       - techbizz
+
 networks:
   techbizz:
     driver: bridge
