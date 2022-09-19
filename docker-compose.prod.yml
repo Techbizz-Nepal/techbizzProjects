@@ -14,7 +14,9 @@ services:
       - '443:443' #thamelmar
     volumes:
       - ./projects:/var/www
+      - ${NGINX_SITES_PATH}:/etc/nginx/sites-available
       - ./nginx/log:/var/log/nginx
+      - ./nginx/ssl:/etc/nginx/ssl
     networks:
       techbizz:
         aliases:
@@ -28,34 +30,34 @@ services:
   admin:
     container_name: "${PROJECT_NAME}_admin"
     build: ./projects/admin
-    restart: unless-stopped
     volumes:
       - ./projects/admin:/admin
     ports:
       - '3000:3000'
-    command: sh -c "yarn && yarn dev"
+    command: sh -c "yarn && yarn build && yarn start"
     networks:
       - techbizz
   
   store:
     container_name: "${PROJECT_NAME}_store"
     build: ./projects/store-ui
-    restart: unless-stopped
     volumes:
       - ./projects/store-ui:/store
     ports:
       - '3001:3001'
-    command: sh -c "yarn && yarn dev --port=3001"
+    command: sh -c "yarn && yarn build && yarn start --port=3001"
     networks:
       - techbizz
   
   api:
     container_name: "${PROJECT_NAME}_php"
     build: ./projects/api.techbizz.test
-    restart: unless-stopped
+    # restart: unless-stopped
     environment:
       PHP_MEMORY_LIMIT: "${PHP_MEMORY_LIMIT}"
       COMPOSER_MEMORY_LIMIT: '-1'
+      # USER: apache
+      # UID: 1000
     volumes:
       - ./projects/api.techbizz.test:/var/www/api.techbizz.test
     ports:
