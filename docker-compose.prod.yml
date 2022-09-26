@@ -56,7 +56,7 @@ services:
 
   api:
     container_name: "${PROJECT_NAME}_api"
-    image: "${PROJECT_NAME}/api:1.0"
+    image: "${PROJECT_NAME}/api:1.1"
     build:
       context: ./projects/api.techbizz.test
       dockerfile: "Dockerfile.prod"
