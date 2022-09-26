@@ -16,9 +16,13 @@ services:
       - ./projects:/var/www
       - ./nginx/log:/var/log/nginx
     networks:
-      techbizz:
+      backend:
         aliases:
           - api.techbizz.test
+      frontend:
+        aliases:
+          - admin.techbizz.test
+          - store.techbizz.test
     depends_on:
       - api
       - admin
@@ -35,7 +39,8 @@ services:
       - '3000:3000'
     command: sh -c "yarn && yarn dev"
     networks:
-      - techbizz
+      - frontend
+      - backend
 
   store:
     container_name: "${PROJECT_NAME}_store"
@@ -48,7 +53,8 @@ services:
       - '3001:3001'
     command: sh -c "yarn && yarn dev --port=3001"
     networks:
-      - techbizz
+      - frontend
+      - backend
 
   api:
     container_name: "${PROJECT_NAME}_php"
@@ -65,7 +71,7 @@ services:
     ports:
       - '9000:9000'
     networks:
-      - techbizz
+      - backend
     depends_on:
       - mysql
       - pma
@@ -76,7 +82,7 @@ services:
     image: "${PROJECT_NAME}/mysql:1.0"
     build: ./mysql
     volumes:
-      - "~/.kuber/data/mysql:/var/lib/mysql"
+      - "persist-data:/var/lib/mysql"
       - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
@@ -85,7 +91,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       TZ: ${TIMEZONE}
     networks:
-      - techbizz
+      - backend
 
   pma:
     image: phpmyadmin/phpmyadmin
@@ -100,19 +106,23 @@ services:
     ports:
       - "8090:80"
     networks:
-      - techbizz
+      - backend
 
   redis:
     build: ./redis
     container_name: "${PROJECT_NAME}_redis"
     image: "${PROJECT_NAME}/redis:1.0"
     volumes:
-      - "~/.kuber/data/redis:/data"
+     - "persist-data:/data"
     ports:
       - "${REDIS_PORT}:6379"
     networks:
-      - techbizz
+      - backend
 
 networks:
-  techbizz:
+  frontend:
     driver: bridge
+  backend:
+    driver: bridge
+volumes:
+  persist-data:
