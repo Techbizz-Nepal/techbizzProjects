@@ -1,7 +1,7 @@
 version: "3"
 
 services:
- 
+
   nginx:
     image: nginx:stable-alpine
     restart: unless-stopped
@@ -19,12 +19,11 @@ services:
       techbizz:
         aliases:
           - api.techbizz.test
-            
     depends_on:
       - api
       - admin
       - store
-  
+
   admin:
     container_name: "${PROJECT_NAME}_admin"
     build: ./projects/admin
@@ -36,7 +35,7 @@ services:
     command: sh -c "yarn && yarn dev"
     networks:
       - techbizz
-  
+
   store:
     container_name: "${PROJECT_NAME}_store"
     build: ./projects/store-ui
@@ -48,7 +47,7 @@ services:
     command: sh -c "yarn && yarn dev --port=3001"
     networks:
       - techbizz
-  
+
   api:
     container_name: "${PROJECT_NAME}_php"
     build: ./projects/api.techbizz.test
