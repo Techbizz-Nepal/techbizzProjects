@@ -1,9 +1,9 @@
 version: "3"
 
 services:
- 
+
   nginx:
-    image: nginx:stable-alpine
+    image: "${PROJECT_NAME}/nginx:1.0"
     restart: unless-stopped
     build:
         context: ./nginx
@@ -19,14 +19,14 @@ services:
       techbizz:
         aliases:
           - api.techbizz.test
-            
     depends_on:
       - api
       - admin
       - store
-  
+
   admin:
     container_name: "${PROJECT_NAME}_admin"
+    image: "${PROJECT_NAME}/admin:1.0"
     build: ./projects/admin
     restart: unless-stopped
     volumes:
@@ -36,9 +36,10 @@ services:
     command: sh -c "yarn && yarn dev"
     networks:
       - techbizz
-  
+
   store:
     container_name: "${PROJECT_NAME}_store"
+    image: "${PROJECT_NAME}/store:1.0"
     build: ./projects/store-ui
     restart: unless-stopped
     volumes:
@@ -48,9 +49,10 @@ services:
     command: sh -c "yarn && yarn dev --port=3001"
     networks:
       - techbizz
-  
+
   api:
     container_name: "${PROJECT_NAME}_php"
+    image: "${PROJECT_NAME}/api:1.0"
     build: ./projects/api.techbizz.test
     restart: unless-stopped
     environment:
@@ -69,6 +71,7 @@ services:
 
   mysql:
     container_name: "${PROJECT_NAME}_mysql"
+    image: "${PROJECT_NAME}/mysql:1.0"
     build: ./mysql
     volumes:
       - "~/.kuber/data/mysql:/var/lib/mysql"
@@ -100,6 +103,7 @@ services:
   redis:
     build: ./redis
     container_name: "${PROJECT_NAME}_redis"
+    image: "${PROJECT_NAME}/redis:1.0"    
     volumes:
      - "~/.kuber/data/redis:/data"
     ports:

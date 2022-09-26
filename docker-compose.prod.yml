@@ -1,9 +1,9 @@
 version: "3"
 
 services:
- 
+
   nginx:
-    image: nginx:stable-alpine
+    image: "${PROJECT_NAME}/nginx:1.0"
     restart: unless-stopped
     build:
         context: ./nginx
@@ -14,50 +14,48 @@ services:
       - '443:443' #thamelmar
     volumes:
       - ./projects:/var/www
-      - ${NGINX_SITES_PATH}:/etc/nginx/sites-available
       - ./nginx/log:/var/log/nginx
-      - ./nginx/ssl:/etc/nginx/ssl
     networks:
       techbizz:
         aliases:
           - api.techbizz.test
-            
     depends_on:
       - api
       - admin
       - store
-  
+
   admin:
     container_name: "${PROJECT_NAME}_admin"
-    build: ./projects/admin
-    volumes:
-      - ./projects/admin:/admin
+    image: "${PROJECT_NAME}/admin:1.1"
+    build: 
+        context: './projects/admin'
+        dockerfile: 'Dockerfile.prod'
+    restart: unless-stopped
     ports:
       - '3000:3000'
-    command: sh -c "yarn && yarn build && yarn start"
     networks:
       - techbizz
-  
+
   store:
     container_name: "${PROJECT_NAME}_store"
-    build: ./projects/store-ui
-    volumes:
-      - ./projects/store-ui:/store
+    image: "${PROJECT_NAME}/store:1.1"
+    build: 
+        context: ./projects/store-ui
+        dockerfile: Dockerfile.prod
+    restart: unless-stopped
     ports:
       - '3001:3001'
-    command: sh -c "yarn && yarn build && yarn start --port=3001"
     networks:
       - techbizz
-  
+
   api:
-    container_name: "${PROJECT_NAME}_php"
+    container_name: "${PROJECT_NAME}_api"
+    image: "${PROJECT_NAME}/api:1.0"
     build: ./projects/api.techbizz.test
-    # restart: unless-stopped
+    restart: unless-stopped
     environment:
       PHP_MEMORY_LIMIT: "${PHP_MEMORY_LIMIT}"
       COMPOSER_MEMORY_LIMIT: '-1'
-      # USER: apache
-      # UID: 1000
     volumes:
       - ./projects/api.techbizz.test:/var/www/api.techbizz.test
     ports:
@@ -71,6 +69,7 @@ services:
 
   mysql:
     container_name: "${PROJECT_NAME}_mysql"
+    image: "${PROJECT_NAME}/mysql:1.0"
     build: ./mysql
     volumes:
       - "~/.kuber/data/mysql:/var/lib/mysql"
@@ -102,6 +101,7 @@ services:
   redis:
     build: ./redis
     container_name: "${PROJECT_NAME}_redis"
+    image: "${PROJECT_NAME}/redis:1.0"    
     volumes:
      - "~/.kuber/data/redis:/data"
     ports:
