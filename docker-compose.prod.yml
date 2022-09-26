@@ -16,9 +16,13 @@ services:
       - ./projects:/var/www
       - ./nginx/log:/var/log/nginx
     networks:
-      techbizz:
+      backend:
         aliases:
           - api.techbizz.test
+      frontend:
+        aliases:
+          - admin.techbizz.test
+          - store.techbizz.test
     depends_on:
       - api
       - admin
