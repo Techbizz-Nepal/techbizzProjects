@@ -31,7 +31,9 @@ services:
   admin:
     container_name: "${PROJECT_NAME}_admin"
     image: "${PROJECT_NAME}/admin:1.0"
-    build: ./projects/admin
+    build:
+      context: ./projects/admin
+      dockerfile: Dockerfile
     restart: unless-stopped
     volumes:
       - ./projects/admin:/admin
@@ -45,7 +47,9 @@ services:
   store:
     container_name: "${PROJECT_NAME}_store"
     image: "${PROJECT_NAME}/store:1.0"
-    build: ./projects/store-ui
+    build:
+      context: ./projects/store-ui
+      dockerfile: Dockerfile
     restart: unless-stopped
     volumes:
       - ./projects/store-ui:/store
@@ -113,7 +117,7 @@ services:
     container_name: "${PROJECT_NAME}_redis"
     image: "${PROJECT_NAME}/redis:1.0"
     volumes:
-     - "persist-data:/data"
+      - "persist-data:/data"
     ports:
       - "${REDIS_PORT}:6379"
     networks:
