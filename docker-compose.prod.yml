@@ -61,6 +61,7 @@ services:
       context: ./projects/api.techbizz.test
       dockerfile: "Dockerfile.prod"
     restart: unless-stopped
+    user: "apache:apache"
     environment:
       PHP_MEMORY_LIMIT: "${PHP_MEMORY_LIMIT}"
       COMPOSER_MEMORY_LIMIT: '-1'
