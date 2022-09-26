@@ -6,8 +6,8 @@ services:
     image: "${PROJECT_NAME}/nginx:1.0"
     restart: unless-stopped
     build:
-        context: ./nginx
-        dockerfile: Dockerfile
+      context: ./nginx
+      dockerfile: Dockerfile
     container_name: "${PROJECT_NAME}_nginx"
     ports:
       - '80:80' #thamelmart
@@ -58,6 +58,8 @@ services:
     environment:
       PHP_MEMORY_LIMIT: "${PHP_MEMORY_LIMIT}"
       COMPOSER_MEMORY_LIMIT: '-1'
+    user: "apache:apache"
+    working_dir: /var/www/api.techbizz.test
     volumes:
       - ./projects/api.techbizz.test:/var/www/api.techbizz.test
     ports:
@@ -103,9 +105,9 @@ services:
   redis:
     build: ./redis
     container_name: "${PROJECT_NAME}_redis"
-    image: "${PROJECT_NAME}/redis:1.0"    
+    image: "${PROJECT_NAME}/redis:1.0"
     volumes:
-     - "~/.kuber/data/redis:/data"
+      - "~/.kuber/data/redis:/data"
     ports:
       - "${REDIS_PORT}:6379"
     networks:
