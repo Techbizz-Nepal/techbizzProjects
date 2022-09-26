@@ -34,7 +34,8 @@ services:
     ports:
       - '3000:3000'
     networks:
-      - techbizz
+      - frontend
+      - backend
 
   store:
     container_name: "${PROJECT_NAME}_store"
@@ -46,7 +47,8 @@ services:
     ports:
       - '3001:3001'
     networks:
-      - techbizz
+      - frontend
+      - backend
 
   api:
     container_name: "${PROJECT_NAME}_api"
@@ -61,7 +63,7 @@ services:
     ports:
       - '9000:9000'
     networks:
-      - techbizz
+      - backend
     depends_on:
       - mysql
       - pma
@@ -72,7 +74,7 @@ services:
     image: "${PROJECT_NAME}/mysql:1.0"
     build: ./mysql
     volumes:
-      - "~/.kuber/data/mysql:/var/lib/mysql"
+      - "persist-data:/var/lib/mysql"
       - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
@@ -81,7 +83,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       TZ: ${TIMEZONE}
     networks:
-      - techbizz
+      - backend
 
   pma:
     image: phpmyadmin/phpmyadmin
@@ -96,19 +98,22 @@ services:
     ports:
       - "8090:80"
     networks:
-      - techbizz
+      - backend
 
   redis:
     build: ./redis
     container_name: "${PROJECT_NAME}_redis"
     image: "${PROJECT_NAME}/redis:1.0"    
     volumes:
-     - "~/.kuber/data/redis:/data"
+     - "persist-data:/data"
     ports:
       - "${REDIS_PORT}:6379"
     networks:
-      - techbizz
-
+      - backend
 networks:
-  techbizz:
+  frontend:
     driver: bridge
+  backend:
+    driver: bridge
+volumes:
+  persist-data:
