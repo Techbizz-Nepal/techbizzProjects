@@ -63,15 +63,20 @@ services:
   api:
     container_name: "${PROJECT_NAME}_php"
     image: "${PROJECT_NAME}/api:1.0"
-    build: ./projects/api.techbizz.test
+    build: 
+      context: ./projects/api.techbizz.test
+      dockerfile: Dockerfile
     restart: unless-stopped
-    environment:
-      PHP_MEMORY_LIMIT: "${PHP_MEMORY_LIMIT}"
-      COMPOSER_MEMORY_LIMIT: '-1'
+    # environment:
+    #   UPLOAD_LIMI: 100M
+    #   PHP_MEMORY_LIMIT: "${PHP_MEMORY_LIMIT}"
+    #   COMPOSER_MEMORY_LIMIT: '-1'
     user: "apache:apache"
     working_dir: /var/www/api.techbizz.test
     volumes:
+      - ./projects/api.techbizz.test/conf.d/php.ini:/usr/local/etc/php/php.ini
       - ./projects/api.techbizz.test:/var/www/api.techbizz.test
+    # command: "composer install"
     ports:
       - '9000:9000'
     networks:
