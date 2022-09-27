@@ -57,7 +57,9 @@ services:
   api:
     container_name: "${PROJECT_NAME}_api"
     image: "${PROJECT_NAME}/api:1.0"
-    build: ./projects/api.techbizz.test
+    build: 
+      context: ./projects/api.techbizz.test
+      dockerfile: Dockerfile.prod
     restart: unless-stopped
     environment:
       PHP_MEMORY_LIMIT: "${PHP_MEMORY_LIMIT}"
