@@ -3,7 +3,7 @@ version: "3"
 services:
 
   nginx:
-    image: "${PROJECT_NAME}/nginx:1.0"
+    image: "${PROJECT_NAME}/nginx:dev"
     restart: unless-stopped
     build:
       context: ./nginx
@@ -30,7 +30,7 @@ services:
 
   admin:
     container_name: "${PROJECT_NAME}_admin"
-    image: "${PROJECT_NAME}/admin:1.0"
+    image: "${PROJECT_NAME}/admin:dev"
     build:
       context: ./projects/admin
       dockerfile: Dockerfile
@@ -46,7 +46,7 @@ services:
 
   store:
     container_name: "${PROJECT_NAME}_store"
-    image: "${PROJECT_NAME}/store:1.0"
+    image: "${PROJECT_NAME}/store:dev"
     build:
       context: ./projects/store-ui
       dockerfile: Dockerfile
@@ -62,7 +62,7 @@ services:
 
   api:
     container_name: "${PROJECT_NAME}_php"
-    image: "${PROJECT_NAME}/api:1.0"
+    image: "${PROJECT_NAME}/api:dev"
     build: 
       context: ./projects/api.techbizz.test
       dockerfile: Dockerfile
@@ -88,7 +88,7 @@ services:
 
   mysql:
     container_name: "${PROJECT_NAME}_mysql"
-    image: "${PROJECT_NAME}/mysql:1.0"
+    image: "${PROJECT_NAME}/mysql:dev"
     build: ./mysql
     volumes:
       - "persist-data:/var/lib/mysql"
@@ -120,7 +120,7 @@ services:
   redis:
     build: ./redis
     container_name: "${PROJECT_NAME}_redis"
-    image: "${PROJECT_NAME}/redis:1.0"
+    image: "${PROJECT_NAME}/redis:dev"
     volumes:
       - "persist-data:/data"
     ports:
