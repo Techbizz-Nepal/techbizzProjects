@@ -80,7 +80,7 @@ services:
     image: "${PROJECT_NAME}/mysql:prod"
     build: ./mysql
     volumes:
-      - "persist-data:/var/lib/mysql"
+      - "persisted_volume:/var/lib/mysql"
       - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
@@ -111,7 +111,7 @@ services:
     container_name: "${PROJECT_NAME}_redis"
     image: "${PROJECT_NAME}/redis:prod"    
     volumes:
-     - "persist-data:/data"
+     - "persisted_volume:/data"
     ports:
       - "${REDIS_PORT}:6379"
     networks:
@@ -122,4 +122,4 @@ networks:
   backend:
     driver: bridge
 volumes:
-  persist-data:
+  persisted_volume:

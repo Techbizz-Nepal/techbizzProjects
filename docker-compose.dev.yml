@@ -63,7 +63,7 @@ services:
   api:
     container_name: "${PROJECT_NAME}_php"
     image: "${PROJECT_NAME}/api:dev"
-    build: 
+    build:
       context: ./projects/api.techbizz.test
       dockerfile: Dockerfile
     restart: unless-stopped
@@ -91,7 +91,7 @@ services:
     image: "${PROJECT_NAME}/mysql:dev"
     build: ./mysql
     volumes:
-      - "persist-data:/var/lib/mysql"
+      - "persisted_volume:/var/lib/mysql"
       - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
@@ -122,11 +122,24 @@ services:
     container_name: "${PROJECT_NAME}_redis"
     image: "${PROJECT_NAME}/redis:dev"
     volumes:
-      - "persist-data:/data"
+      - "persisted_volume:/data"
     ports:
       - "${REDIS_PORT}:6379"
     networks:
       - backend
+
+  rabbitmq:
+    restart: always
+    container_name: "${PROJECT_NAME}_rabbitmq"
+    image: rabbitmq:3-management
+    volumes:
+      - persisted_volume:/var/lib/rabbitmq
+    ports:
+      - 15672:15672
+      - 5672:5672
+    networks:
+      - backend
+      - frontend
 
 networks:
   frontend:
@@ -134,4 +147,4 @@ networks:
   backend:
     driver: bridge
 volumes:
-  persist-data:
+  persisted_volume:
