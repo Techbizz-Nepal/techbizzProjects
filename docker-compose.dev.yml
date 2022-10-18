@@ -73,8 +73,14 @@ services:
     #   COMPOSER_MEMORY_LIMIT: '-1'
     user: "apache:apache"
     working_dir: /var/www/api.techbizz.test
+    environment:
+            PHP_IDE_CONFIG: "serverName=gravity"
+    extra_hosts:
+        - "host.docker.internal:host-gateway"
     volumes:
       - ./projects/api.techbizz.test/conf.d/php.ini:/usr/local/etc/php/php.ini
+      - ./projects/api.techbizz.test/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - ./projects/api.techbizz.test/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
       - ./projects/api.techbizz.test:/var/www/api.techbizz.test
     # command: "composer install"
     ports:
