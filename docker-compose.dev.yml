@@ -51,6 +51,7 @@ services:
       context: ./projects/store-ui
       dockerfile: Dockerfile
     restart: unless-stopped
+    # user: "1000:1000"
     volumes:
       - ./projects/store-ui:/store
     ports:
