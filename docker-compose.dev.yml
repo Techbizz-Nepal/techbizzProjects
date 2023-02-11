@@ -16,9 +16,13 @@ services:
       - ./projects:/var/www
       - ./nginx/log:/var/log/nginx
     networks:
-      techbizz:
+      backend:
         aliases:
           - api.techbizz.test
+      frontend:
+        aliases:
+          - store.techbizz.test
+          - admin.techbizz.test
     depends_on:
       - api
       - admin
@@ -35,7 +39,13 @@ services:
       - '3000:3000'
     command: sh -c "yarn && yarn dev"
     networks:
-      - techbizz
+      backend:
+        aliases:
+          - api.techbizz.test
+      frontend:
+        aliases:
+          - store.techbizz.test
+          - admin.techbizz.test
 
   store:
     container_name: "${PROJECT_NAME}_store"
@@ -48,7 +58,13 @@ services:
       - '3001:3001'
     command: sh -c "yarn && yarn dev --port=3001"
     networks:
-      - techbizz
+      backend:
+        aliases:
+          - api.techbizz.test
+      frontend:
+        aliases:
+          - store.techbizz.test
+          - admin.techbizz.test
 
   api:
     container_name: "${PROJECT_NAME}_php"
@@ -57,13 +73,23 @@ services:
     restart: unless-stopped
     environment:
       PHP_MEMORY_LIMIT: "${PHP_MEMORY_LIMIT}"
+      PHP_IDE_CONFIG: serverName=gravity
       COMPOSER_MEMORY_LIMIT: '-1'
     volumes:
+      - ./projects/api.techbizz.test/conf.d/php.ini:/usr/local/etc/php/php.ini
+      - ./projects/api.techbizz.test/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - ./projects/api.techbizz.test/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
       - ./projects/api.techbizz.test:/var/www/api.techbizz.test
     ports:
       - '9000:9000'
     networks:
-      - techbizz
+      backend:
+        aliases:
+          - api.techbizz.test
+      frontend:
+        aliases:
+          - store.techbizz.test
+          - admin.techbizz.test
     depends_on:
       - mysql
       - pma
@@ -74,7 +100,7 @@ services:
     image: "${PROJECT_NAME}/mysql:1.0"
     build: ./mysql
     volumes:
-      - "~/.kuber/data/mysql:/var/lib/mysql"
+      - ~/.techbizz/data/mysql:/var/lib/mysql
       - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
@@ -83,7 +109,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       TZ: ${TIMEZONE}
     networks:
-      - techbizz
+      - backend
 
   pma:
     image: phpmyadmin/phpmyadmin
@@ -98,7 +124,7 @@ services:
     ports:
       - "8090:80"
     networks:
-      - techbizz
+      - backend
 
   redis:
     build: ./redis
@@ -109,8 +135,10 @@ services:
     ports:
       - "${REDIS_PORT}:6379"
     networks:
-      - techbizz
+      - backend
 
 networks:
-  techbizz:
+  frontend:
+    driver: bridge
+  backend:
     driver: bridge
