@@ -74,6 +74,7 @@ services:
     environment:
       PHP_MEMORY_LIMIT: "${PHP_MEMORY_LIMIT}"
       PHP_IDE_CONFIG: serverName=gravity
+      XDEBUG_CONFIG: idekey=PHPSTORM
       COMPOSER_MEMORY_LIMIT: '-1'
     volumes:
       - ./projects/api.techbizz.test/conf.d/php.ini:/usr/local/etc/php/php.ini
@@ -82,6 +83,7 @@ services:
       - ./projects/api.techbizz.test:/var/www/api.techbizz.test
     ports:
       - '9000:9000'
+      - '9003:9003'
     networks:
       backend:
         aliases:
