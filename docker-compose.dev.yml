@@ -102,7 +102,7 @@ services:
     image: "${PROJECT_NAME}/mysql:1.0"
     build: ./mysql
     volumes:
-      - ~/.techbizz/data/mysql:/var/lib/mysql
+      - ~/${PROJECT_NAME}/data/mysql:/var/lib/mysql
       - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
@@ -131,9 +131,9 @@ services:
   redis:
     build: ./redis
     container_name: "${PROJECT_NAME}_redis"
-    image: "${PROJECT_NAME}/redis:1.0"    
+    image: "${PROJECT_NAME}/redis:1.0"
     volumes:
-     - "~/.kuber/data/redis:/data"
+     - "~/${PROJECT_NAME}/data/redis:/data"
     ports:
       - "${REDIS_PORT}:6379"
     networks:
