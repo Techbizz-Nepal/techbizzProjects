@@ -83,7 +83,6 @@ services:
       - ./projects/api.techbizz.test:/var/www/api.techbizz.test
     ports:
       - '9000:9000'
-      - '9003:9003'
     networks:
       backend:
         aliases:
@@ -102,7 +101,7 @@ services:
     image: "${PROJECT_NAME}/mysql:1.0"
     build: ./mysql
     volumes:
-      - ~/${PROJECT_NAME}/data/mysql:/var/lib/mysql
+      - ~/.${PROJECT_NAME}/data/mysql:/var/lib/mysql
       - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
@@ -133,7 +132,7 @@ services:
     container_name: "${PROJECT_NAME}_redis"
     image: "${PROJECT_NAME}/redis:1.0"
     volumes:
-     - "~/${PROJECT_NAME}/data/redis:/data"
+     - "~/.${PROJECT_NAME}/data/redis:/data"
     ports:
       - "${REDIS_PORT}:6379"
     networks:
