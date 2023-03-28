@@ -13,7 +13,7 @@ services:
       - '80:80' #thamelmart
       - '443:443' #thamelmar
     volumes:
-      - ./projects:/var/www
+      - ./projects/api.techbizz.test:/var/www
       - ./nginx/log:/var/log/nginx
     networks:
       backend:
@@ -80,7 +80,7 @@ services:
       - ./projects/api.techbizz.test/conf.d/php.ini:/usr/local/etc/php/php.ini
       - ./projects/api.techbizz.test/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
       - ./projects/api.techbizz.test/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
-      - ./projects/api.techbizz.test:/var/www/api.techbizz.test
+      - ./projects/api.techbizz.test:/var/www
     ports:
       - '9000:9000'
     networks:
