@@ -16,13 +16,8 @@ services:
       - ./projects/api.techbizz.test:/var/www
       - ./nginx/log:/var/log/nginx
     networks:
-      backend:
-        aliases:
-          - api.techbizz.test
-      frontend:
-        aliases:
-          - store.techbizz.test
-          - admin.techbizz.test
+      - backend
+      - frontend
     depends_on:
       - api
       - admin
@@ -39,12 +34,8 @@ services:
       - '3000:3000'
     command: sh -c "yarn && yarn dev"
     networks:
-      backend:
-        aliases:
-          - api.techbizz.test
       frontend:
         aliases:
-          - store.techbizz.test
           - admin.techbizz.test
 
   store:
@@ -58,13 +49,9 @@ services:
       - '3001:3001'
     command: sh -c "yarn && yarn dev --port=3001"
     networks:
-      backend:
-        aliases:
-          - api.techbizz.test
       frontend:
         aliases:
           - store.techbizz.test
-          - admin.techbizz.test
 
   api:
     container_name: "${PROJECT_NAME}_php"
@@ -87,10 +74,6 @@ services:
       backend:
         aliases:
           - api.techbizz.test
-      frontend:
-        aliases:
-          - store.techbizz.test
-          - admin.techbizz.test
     depends_on:
       - mysql
       - pma
