@@ -18,11 +18,7 @@ services:
     networks:
       - backend
       - frontend
-    depends_on:
-      - api
-      - admin
-      - store
-
+    
   admin:
     container_name: "${PROJECT_NAME}_admin"
     image: "${PROJECT_NAME}/admin:1.0"
@@ -37,6 +33,9 @@ services:
       frontend:
         aliases:
           - admin.techbizz.test
+    depends_on:
+      - nginx
+      - api
 
   store:
     container_name: "${PROJECT_NAME}_store"
@@ -52,6 +51,9 @@ services:
       frontend:
         aliases:
           - store.techbizz.test
+    depends_on:
+      - nginx
+      - api
 
   api:
     container_name: "${PROJECT_NAME}_php"
@@ -76,8 +78,8 @@ services:
           - api.techbizz.test
     depends_on:
       - mysql
-      - pma
       - redis
+      - nginx
 
   mysql:
     container_name: "${PROJECT_NAME}_mysql"
@@ -109,6 +111,8 @@ services:
       - "8090:80"
     networks:
       - backend
+    depends_on:
+      - mysql
 
   redis:
     build: ./redis
