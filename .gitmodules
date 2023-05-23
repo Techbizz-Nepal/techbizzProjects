@@ -10,7 +10,6 @@
 	path = projects/admin
 	url = git@github.com:susantp/admin.git
 	branch = main
-
 [submodule "product_module"]
     path= packages/product_module
     url = git@github.com:Techbizz-Nepal/product_module.git
