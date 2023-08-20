@@ -12,5 +12,9 @@
 	branch = main
 [submodule "product_module"]
 	path = packages/product_module
-	url = git@github.com:Techbizz-Nepal/product_module.git
+	url = git@github.com:techbizz-nepal/product_module.git
+	branch = main
+[submodule "image_module"]
+	path = packages/image_module
+	url = git@github.com:techbizz-nepal/image_module.git
 	branch = main
