@@ -3,3 +3,4 @@ fasapi-virtualenv
 .vscode/
 .idea/
 packages/
+docs/
